@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { gsap } from 'gsap';
+import CharView from './CharView.vue';
 const startVideoRef = ref(null)
 const loopVideoRef = ref(null)
 
@@ -346,9 +347,9 @@ const playAnimationOnce5 = () => {
     </div>
 
     <div id="page5">
-      <div class="page51" @mouseenter="playAnimationOnce3"></div>
-      <div class="page52" @mouseenter="playAnimationOnce4"></div>
-      <div class="page53" @mouseenter="playAnimationOnce5"></div>
+      <div class="page51" @mouseenter="playAnimationOnce3();"></div>
+      <div class="page52" @mouseenter="playAnimationOnce4();"></div>
+      <div class="page53" @mouseenter="playAnimationOnce5();"></div>
       <div
         class="font51"
       >
@@ -449,6 +450,10 @@ const playAnimationOnce5 = () => {
           </g>
         </svg>
       </div>
+    </div>
+
+    <div id="page6">
+      <CharView/>
     </div>
   </div>
 </template>
@@ -682,18 +687,21 @@ img {
   width: 100vw;
   top: 0;
   height: 98vh;
+  z-index: 10;
 }
 .page52 {
   position: absolute;
   width: 100vw;
-  top: 98vh;
-  height: 82vh;
+  top: 99vh;
+  height: 81vh;
+  z-index: 10;
 }
 .page53 {
   position: absolute;
   width: 100vw;
   top: 180vh;
-  height: 98vh;
+  height: 141vh;
+  z-index: 10;
 }
 .font51 {
   position: absolute;
@@ -758,6 +766,7 @@ img {
   height: 57.4vh;
   overflow: hidden;
   opacity: 0;
+  z-index: 11;
 }
 
 .font55 {
@@ -791,11 +800,12 @@ img {
   height: 57.4vh;
   overflow: hidden;
   opacity: 0;
+  z-index: 11;
 }
 
 .font57 {
   position: absolute;
-  bottom: 0;
+  bottom: -6px;
   left: 0;
   width: 100vw;
 }
@@ -817,5 +827,14 @@ img {
   bottom: 64vh;
   left: 50%;
   transform: translateX(-50%);
+}
+
+
+#page6 {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+  background-color: #ffffff;
 }
 </style>
