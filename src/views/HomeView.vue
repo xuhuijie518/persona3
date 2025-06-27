@@ -10,6 +10,14 @@ const show2 = ref(false);
 const show3 = ref(true);
 let intervalId1 = [];
 
+// 添加 Intersection Observer 相关代码
+const page3Ref = ref(null);
+const page4Ref = ref(null);
+const page51Ref = ref(null);
+const page52Ref = ref(null);
+const page53Ref = ref(null);
+let observer;
+
 onMounted(() => {
   const startVideo = startVideoRef.value
   const loopVideo = loopVideoRef.value
@@ -30,12 +38,58 @@ onMounted(() => {
   intervalId1.push(setTimeout(() => {
     show.value = !show.value;
   }, 2000));
+
+  // 初始化 Intersection Observer
+  setupIntersectionObserver();
 })
 
 onBeforeUnmount(() => {
   clearInterval(intervalId1);
+  if (observer) {
+    observer.disconnect();
+  }
 });
 
+// 设置 Intersection Observer
+const setupIntersectionObserver = () => {
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.3 // 当元素30%进入视口时触发
+  };
+
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const targetId = entry.target.id;
+        switch(targetId) {
+          case 'page3':
+            playAnimationOnce();
+            break;
+          case 'page4':
+            playAnimationOnce2();
+            break;
+          case 'page51':
+            playAnimationOnce3();
+            break;
+          case 'page52':
+            playAnimationOnce4();
+            break;
+          case 'page53':
+            playAnimationOnce5();
+            break;
+        }
+      }
+    });
+  }, options);
+
+  // 观察所有需要触发的元素
+  if (page3Ref.value) observer.observe(page3Ref.value);
+  if (page4Ref.value) observer.observe(page4Ref.value);
+  if (page51Ref.value) observer.observe(page51Ref.value);
+  if (page52Ref.value) observer.observe(page52Ref.value);
+  if (page53Ref.value) observer.observe(page53Ref.value);
+};
 
 
 const letters = ref(null);
@@ -295,7 +349,7 @@ const playAnimationOnce5 = () => {
         <source src="/src/assets/home/videoplayback.mp4" type="video/mp4" />
       </video>
     </div>
-    <div id="page3" @mouseenter="playAnimationOnce">
+    <div id="page3" ref="page3Ref">
       <div
         class="font2"
       >
@@ -318,7 +372,7 @@ const playAnimationOnce5 = () => {
       </div>
     </div>
 
-    <div id="page4" @mouseenter="playAnimationOnce2">
+    <div id="page4" ref="page4Ref">
       <div
         class="font3"
       >
@@ -347,9 +401,9 @@ const playAnimationOnce5 = () => {
     </div>
 
     <div id="page5">
-      <div class="page51" @mouseenter="playAnimationOnce3();"></div>
-      <div class="page52" @mouseenter="playAnimationOnce4();"></div>
-      <div class="page53" @mouseenter="playAnimationOnce5();"></div>
+      <div class="page51" id="page51" ref="page51Ref"></div>
+      <div class="page52" id="page52" ref="page52Ref"></div>
+      <div class="page53" id="page53" ref="page53Ref"></div>
       <div
         class="font51"
       >

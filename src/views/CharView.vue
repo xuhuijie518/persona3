@@ -17,7 +17,7 @@ const images = ref([
   { active: imageMap['a/7'], unactive: imageMap['ua/7'], name: 'Koromaru' },
   { active: imageMap['a/8'], unactive: imageMap['ua/8'], name: 'Aigis' },
   { active: imageMap['a/9'], unactive: imageMap['ua/9'], name: 'Ken' },
-  { active: imageMap['a/10'], unactive: imageMap['ua/10'], name: 'Shinjiro' },
+  { active: imageMap['a/10'], unactive: imageMap['ua/10'], name: 'Shinjiro' }
 ]);
 
 const scrollContainer = ref(null);
